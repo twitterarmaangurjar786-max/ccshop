@@ -46,10 +46,9 @@ async def _send_home(message: Message, session: AsyncSession, user: User, role: 
 @router.message(Command("start"))
 async def cmd_start(message: Message, session: AsyncSession, user: User, role: Role, state: FSMContext):
     await state.clear()
-    welcome = (
-        f"👋 Welcome, <b>{message.from_user.full_name}</b>!\n"
-        "You're in the Flafa sprite cc shop.\n"
-    )
+    template = await ss.get_page(session, ss.KEY_WELCOME, ss.DEFAULT_WELCOME)
+    title = await ss.get_page(session, ss.KEY_TITLE, ss.DEFAULT_TITLE)
+    welcome = template.replace("{name}", message.from_user.full_name).replace("{title}", title)
     await message.answer(welcome)
     await _send_home(message, session, user, role)
 

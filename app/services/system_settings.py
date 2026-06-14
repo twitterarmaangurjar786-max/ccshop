@@ -18,6 +18,19 @@ KEY_RULES = "page_rules"
 KEY_CONTACTS = "page_contacts"
 KEY_REFUND = "page_refund"
 
+# Owner-editable branding
+KEY_TITLE = "brand_title"
+KEY_SUBTITLE = "brand_subtitle"
+KEY_WELCOME = "msg_welcome"
+
+DEFAULT_TITLE = "FLAFA SPRITE CC SHOP"
+DEFAULT_SUBTITLE = "CC inventory from verified sellers"
+DEFAULT_WELCOME = (
+    "👋 Welcome, <b>{name}</b>!\n"
+    "You're in the {title}.\n"
+)
+
+
 DEFAULT_RULES = (
     "📜 <b>MARKETPLACE RULES</b>\n\n"
     "1. All sales are final unless covered by the refund policy.\n"

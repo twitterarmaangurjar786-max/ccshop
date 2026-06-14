@@ -927,6 +927,9 @@ async def settings_menu(event, role: Role):
     from aiogram.utils.keyboard import InlineKeyboardBuilder
 
     b = InlineKeyboardBuilder()
+    b.button(text="🏷 Edit Bot Title", callback_data="owner:set:title")
+    b.button(text="💬 Edit Subtitle", callback_data="owner:set:subtitle")
+    b.button(text="👋 Edit Welcome Message", callback_data="owner:set:welcome")
     b.button(text="📜 Edit Rules", callback_data="owner:set:rules")
     b.button(text="📞 Edit Contacts", callback_data="owner:set:contacts")
     b.button(text="↩ Edit Refund Page", callback_data="owner:set:refund")
@@ -950,6 +953,16 @@ async def settings_edit_start(call: CallbackQuery, role: Role, state: FSMContext
     await state.set_state(SettingStates.waiting_value)
     await state.update_data(key=key)
     prompts = {
+        "title": (
+            "🏷 Send the new <b>Bot Title</b> (shown at the top of the home page).\n"
+            "Plain text — no need for emoji or bold."
+        ),
+        "subtitle": "💬 Send the new <b>Subtitle</b> (the small line under the title):",
+        "welcome": (
+            "👋 Send the new <b>Welcome Message</b> shown on /start.\n"
+            "You can use <code>{name}</code> for the user's name and "
+            "<code>{title}</code> for the bot title. HTML allowed."
+        ),
         "rules": "Send the new Rules text (HTML allowed):",
         "contacts": "Send the new Contacts text (HTML allowed):",
         "refund": "Send the new Refund page text (HTML allowed):",
@@ -979,6 +992,21 @@ async def settings_edit_save(message: Message, session: AsyncSession, state: FSM
         )
         return
 
-    key_map = {"rules": ss.KEY_RULES, "contacts": ss.KEY_CONTACTS, "refund": ss.KEY_REFUND}
+    key_map = {
+        "title": ss.KEY_TITLE,
+        "subtitle": ss.KEY_SUBTITLE,
+        "welcome": ss.KEY_WELCOME,
+        "rules": ss.KEY_RULES,
+        "contacts": ss.KEY_CONTACTS,
+        "refund": ss.KEY_REFUND,
+    }
+    if key not in key_map:
+        await message.answer("❌ Unknown setting.")
+        return
     await ss.set_page(session, key_map[key], value)
-    await message.answer("✅ Page updated.")
+    feedback = {
+        "title": "✅ Bot title updated. Open 🏠 Home to see it.",
+        "subtitle": "✅ Subtitle updated. Open 🏠 Home to see it.",
+        "welcome": "✅ Welcome message updated. Send /start to preview it.",
+    }
+    await message.answer(feedback.get(key, "✅ Page updated."))

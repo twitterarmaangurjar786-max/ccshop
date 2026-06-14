@@ -10,7 +10,9 @@ from app.repositories.marketing_repo import MarketingRepository
 from app.repositories.seller_repo import SellerRepository
 from app.repositories.user_repo import UserRepository
 from app.services.stats_service import StatsService
+from app.services import system_settings as ss
 from app.services.system_settings import get_active_filter_text
+
 
 CUR = settings.currency_symbol
 
@@ -24,9 +26,12 @@ async def render_home(session: AsyncSession, user: User, role: Role) -> tuple[st
 
     filter_text = await get_active_filter_text(session, user.id)
 
+    title = await ss.get_page(session, ss.KEY_TITLE, ss.DEFAULT_TITLE)
+    subtitle = await ss.get_page(session, ss.KEY_SUBTITLE, ss.DEFAULT_SUBTITLE)
+
     text = (
-        "🏪 <b>FLAFA SPRITE CC SHOP</b>\n"
-        "<i>CC inventory from verified sellers</i>\n"
+        f"🏪 <b>{title}</b>\n"
+        f"<i>{subtitle}</i>\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         f"👥 <b>Sellers:</b> {stats.total_sellers}\n"
         f"📦 <b>Total Stock:</b> {stats.total_stock:,}\n"

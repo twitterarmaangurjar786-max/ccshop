@@ -1,0 +1,14 @@
+aiogram==3.13.1
+SQLAlchemy==2.0.35
+alembic==1.13.3
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+redis==5.0.8
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-dotenv==1.0.1
+aiohttp==3.10.8
+APScheduler==3.10.4
+tronpy==0.5.0
+structlog==24.4.0
+orjson==3.10.7

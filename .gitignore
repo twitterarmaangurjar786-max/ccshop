@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Env
+.env
+*.env
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# DB / backups
+backups/
+*.sqlite3
+
+# Docker
+.docker/
+
+# IDE
+.vscode/
+.idea/
+
+# Exports
+exports/
+tmp/

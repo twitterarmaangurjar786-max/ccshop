@@ -25,8 +25,8 @@ async def render_home(session: AsyncSession, user: User, role: Role) -> tuple[st
     filter_text = await get_active_filter_text(session, user.id)
 
     text = (
-        "🏪 <b>MARKETPLACE</b>\n"
-        "<i>Redeem-code inventory from verified sellers</i>\n"
+        "🏪 <b>FLAFA SPRITE CC SHOP</b>\n"
+        "<i>CC inventory from verified sellers</i>\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         f"👥 <b>Sellers:</b> {stats.total_sellers}\n"
         f"📦 <b>Total Stock:</b> {stats.total_stock:,}\n"

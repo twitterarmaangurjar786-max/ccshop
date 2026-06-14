@@ -48,7 +48,7 @@ async def cmd_start(message: Message, session: AsyncSession, user: User, role: R
     await state.clear()
     welcome = (
         f"👋 Welcome, <b>{message.from_user.full_name}</b>!\n"
-        "You're in the redeem-code marketplace.\n"
+        "You're in the Flafa sprite cc shop.\n"
     )
     await message.answer(welcome)
     await _send_home(message, session, user, role)

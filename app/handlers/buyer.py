@@ -1,4 +1,4 @@
-  """Buyer handlers: search, browse, purchase, top-up, filters, export, etc."""
+"""Buyer handlers: search, browse, purchase, top-up, filters, export, etc."""
 from __future__ import annotations
 
 from decimal import Decimal, InvalidOperation
